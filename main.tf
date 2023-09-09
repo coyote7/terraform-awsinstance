@@ -19,14 +19,14 @@ resource "aws_instance" "instance-example" {
   vpc_security_group_ids = [aws_security_group.example-sg.id]
   user_data              = <<-EOF
      echo "Welcome to my  Webpage">index.html
-     nohup busybox -f -p 8080 &
+     nohup busybox -f -p ${var.server-port} &
      EOF
   user_data_replace_on_change = true
 }
 resource "aws_security_group" "example-sg" {
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.server-port
+    to_port     = var.server-port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
