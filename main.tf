@@ -21,6 +21,7 @@ resource "aws_instance" "instance-example" {
      echo "Welcome to my  Webpage">index.html
      nohup busybox -f -p 8080 &
      EOF
+  user_data_replace_on_change = true
 }
 resource "aws_security_group" "example-sg" {
   ingress {
